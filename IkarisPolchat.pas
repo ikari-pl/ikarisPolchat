@@ -392,8 +392,8 @@ function SwapWord(Value: Word): Word; assembler; register;
 
 implementation
 
-var CopyRightStr : string = 'Ikari''s Polchat Component 7; by ikari';
-    Command : string = '(c)2002-2006 by ikari';
+var CopyRightStr : string = 'Ikari''s Polchat Component 8; by ikari';
+    Command : string = '(c)2002-2009 by ikari';
     i : integer;
 
 procedure Register;
@@ -491,7 +491,7 @@ begin
  FUPrefs := TUserPrefs.create(self);
  FSocks := TSocksPrefs.Create(Self);
 
- FServ := 'http://s9.polchat.pl/';
+ FServ := 'http://s1.polchat.pl/';
  FRoom := 'ikari';
  FLink := 'http://www.polchat.pl/chat/room.phtml/?room=ikari';
 
