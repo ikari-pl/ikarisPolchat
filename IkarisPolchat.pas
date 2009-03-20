@@ -46,7 +46,7 @@ type
   public
     property ti[Index: Word]: Word read GetInteger write SetInteger;
     property ts[Index: Word]: string read GetString write SetString;
-  published
+ // published
     function LoadFromStream(Stream: TStream): integer;
     function SaveToStream(Stream: TStream): integer;
     function LoadFromBuffer(const Buffer; BufferSize: integer): integer;
@@ -108,7 +108,7 @@ type
     constructor Create(Nick: WideString; GlobalStatus, IndividialStatus: byte; ClientID: widestring);
     procedure SetGlobalStatus(Status: Byte);
     procedure SetIndivStatus(Status: Byte);
-  published
+ // published
     property Nick : widestring read FNick;
     property Client_ID : widestring read FClientID;
     property GuestNum : byte read GetGuestNum;
@@ -203,7 +203,6 @@ type
     FHTTP: THTTPCli;
     FClientSocket: TWSocket;
     FConnected   : boolean;
-    FSocketBusy  : boolean;
     FInputBuffer : TMemoryStream;
 
     wait4rest : boolean;
@@ -1580,7 +1579,7 @@ begin
           FInputBuffer.SetSize(PacketSize);
           DataInSize := FClientSocket.Receive(FInputBuffer.Memory, PacketSize);
           if DataInSize>0 then begin
-            MissingSize := PacketSize-DataInSize;
+            MissingSize := PacketSize-Cardinal(DataInSize);
             FInputBuffer.Position := FInputBuffer.Position+DataInSize;
           end;
      {$IFDEF LOGCONN}
