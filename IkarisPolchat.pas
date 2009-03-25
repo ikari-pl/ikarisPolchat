@@ -1,6 +1,7 @@
 unit IkarisPolchat;
 // Ikari's POLCHAT3 component, v. 8
 
+
 //{$DEFINE LOGCONN}
 //{$APPTYPE CONSOLE}
 
