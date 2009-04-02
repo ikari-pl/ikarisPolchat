@@ -1207,8 +1207,10 @@ end;
 procedure TIkarisPolchat.SetRoom(Value : string);
 begin
   try
+{$IFDEF FALSE}
   if Self.Connected and (FRoom <> Value) then
       Self.WyslijMsg('/join '+Zakoduj(Value)); //, FRoom);
+{$ENDIF}
   finally
    FRoom := Value;
   end;
