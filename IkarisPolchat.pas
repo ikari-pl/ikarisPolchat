@@ -913,7 +913,8 @@ begin
      end
    else
      ErrorMessage('Nie mam na liœcie u¿ytkownika "'+xywa
-                 +'", który podobno w³aœnie zmieni³ StatusPublic');
+                 +'", który podobno w³aœnie zmieni³ StatusPublic'
+                 +' w pokoju: '+pokoj+'.'); //wtf omg lol bbq
   except on E: Exception do
    ErrorMessage('Blad w StatusPublic: '+E.Message);
   end;
@@ -1966,7 +1967,7 @@ var
   I: Integer;
   tmp: UTF8String;
 begin
- tmp := Lowercase(UTF8ENcode(Nick));
+ tmp := Lowercase(UTF8ENcode(Nick+' '));
  Result := '';
  for I := 0 to Length(tmp)-1 do    // Iterate
  begin
