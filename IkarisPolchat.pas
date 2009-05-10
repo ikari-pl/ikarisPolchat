@@ -1,5 +1,5 @@
 unit IkarisPolchat;
-// Ikari's POLCHAT3 component, v. 8
+// Ikari's POLCHAT3 component, v. 9
 
 
 //{$DEFINE LOGCONN}
@@ -231,6 +231,7 @@ type
     FChatRooms: TStringList;
     FPolchatVersion : TVersionRec;
 
+    FRoomsToJoin : TStringList;
 
     FVerDetect: TNotifyEvent;
     FPolchatConnected : TSessionConnected;
@@ -451,7 +452,7 @@ end;
 constructor TIkarisPolchat.Create(AOwner: TComponent);
 begin
  inherited Create(AOwner);
- FProgramID := 'ICeQ 5.0';
+ FProgramID := 'who knowz';
  FConnected := false;
  
  //StosOut:= THashedStringList.Create;
@@ -670,6 +671,10 @@ begin
  Prefs.Add('nnum=1');
  Prefs.Add('jlmsg=true');
  Prefs.Add('ignprv=false');
+
+ FRoomsToJoin := explode(',', FRoom);
+ if (FRoomsToJoin.Count > 1) then
+   FRoom := FRoomsToJoin[0];
 
  Pakiet := TPakiet.Create;
  Pakiet.ni := 1;
@@ -911,10 +916,10 @@ begin
        status := pakiet.ti[1];
        TOsoba(Nicks.Objects[i]).SetGlobalStatus(status);
      end
-   else
-     ErrorMessage('Nie mam na liœcie u¿ytkownika "'+xywa
-                 +'", który podobno w³aœnie zmieni³ StatusPublic'
-                 +' w pokoju: '+pokoj+'.'); //wtf omg lol bbq
+//   else
+//     ErrorMessage('Nie mam na liœcie u¿ytkownika "'+xywa
+//                 +'", który podobno w³aœnie zmieni³ StatusPublic'
+//                 +' w pokoju: '+pokoj+'.'); //wtf omg lol bbq
   except on E: Exception do
    ErrorMessage('Blad w StatusPublic: '+E.Message);
   end;
@@ -1061,12 +1066,36 @@ var str: string;
     Tablica: TStringList;
     Tablica2: TStringList;
     wart: Variant;
+    pk: TPakiet;
 begin
   try
    ustaw := pakiet.ts[0];
   except on E: Exception do
    ErrorMessage('Nie moglem odczytac ustawien serwera: '+E.Message);
   end;
+
+try
+ if (FRoomsToJoin <> nil) then
+ if (FRoomsToJoin.Count > 1) then begin
+   QueuePacket(Pakiet);
+   for I := 1 to FRoomsToJoin.Count - 1 do begin
+     if Trim(FRoomsToJoin.Strings[i]) = '' then
+       continue;
+     pk := TPakiet.Create;
+     pk.ni := 1;
+     pk.ns := 1;
+     pk.ti[0] := $019a;
+     pk.ts[0] := '/join '+FRoomsToJoin.Strings[i];
+     if (i = FRoomsToJoin.Count-1) then
+       SendPacket(pk)
+     else
+       QueuePacket(pk);
+   end;
+   FreeAndNil(FRoomsToJoin);
+ end
+except
+  ErrorMessage('Multijoin sie nie udal :(');
+end;
 
   try
    Tablica := Explode('&', ustaw);
