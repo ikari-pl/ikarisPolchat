@@ -652,16 +652,16 @@ begin
  if Error <> 0 then
   begin
     case Error of
-    10060: ErrorMessage('Socket error 10060: Nie moøna znaleüÊ serwera!');
-    10061: ErrorMessage('Socket error 10061: Serwer, z ktÛrym siÍ ≥πczysz nie istnieje!');
-    10065: ErrorMessage('Socket error 10065: Brak po≥πczenia (z internetem?)');
+    10060: ErrorMessage('Socket error 10060: Nie mo≈ºna znale≈∫ƒá serwera!');
+    10061: ErrorMessage('Socket error 10061: Serwer, z kt√≥rym siƒô ≈ÇƒÖczysz nie istnieje!');
+    10065: ErrorMessage('Socket error 10065: Brak po≈ÇƒÖczenia (z internetem?)');
     else
       ErrorMessage('Blad laczenia nr '+IntToStr(Error));
     end;
     GoodBye := '***';
     Exit;
   end;
- GoodBye := Zakoduj('Utrata po≥πczenia z serwerem');
+ GoodBye := Zakoduj('Utrata po≈ÇƒÖczenia z serwerem');
 
  if Encoding then FRoom := Zakoduj(FRoom);
  if Encoding then FRoom := Zakoduj(FNick);
@@ -888,8 +888,8 @@ begin
        nicks.Delete(i);
      end
    else
-     ErrorMessage('Nie mam na liúcie uøytkownika "'+xywa
-                 +'", ktÛry podobno w≥aúnie wyszed≥');
+     ErrorMessage('Nie mam na li≈õcie u≈ºytkownika "'+xywa
+                 +'", kt√≥ry podobno w≈Ça≈õnie wyszed≈Ç');
   except on E: Exception do
    ErrorMessage('Blad w Departure: '+ E.Message);
   end;
@@ -917,8 +917,8 @@ begin
        TOsoba(Nicks.Objects[i]).SetGlobalStatus(status);
      end
 //   else
-//     ErrorMessage('Nie mam na liúcie uøytkownika "'+xywa
-//                 +'", ktÛry podobno w≥aúnie zmieni≥ StatusPublic'
+//     ErrorMessage('Nie mam na li≈õcie u≈ºytkownika "'+xywa
+//                 +'", kt√≥ry podobno w≈Ça≈õnie zmieni≈Ç StatusPublic'
 //                 +' w pokoju: '+pokoj+'.'); //wtf omg lol bbq
   except on E: Exception do
    ErrorMessage('Blad w StatusPublic: '+E.Message);
@@ -950,8 +950,8 @@ begin
          TOsoba(Nicks.Objects[i]).SetIndivStatus(status);
        end
 {     else
-       ErrorMessage('Nie mam na liúcie uøytkownika "'+xywa
-                   +'", ktÛry podobno w≥aúnie zmieni≥ StatusPrivate');}
+       ErrorMessage('Nie mam na li≈õcie u≈ºytkownika "'+xywa
+                   +'", kt√≥ry podobno w≈Ça≈õnie zmieni≈Ç StatusPrivate');}
    end;
   except on E: Exception do
    ErrorMessage('Blad w StatusPrivate: '+E.Message);
@@ -1473,7 +1473,7 @@ case HTTPConnection of    //
         Connected := True;
         PolchatConnected(Self, 0);
         HTTPTimer := TTimer.Create(Self);
-        HTTPTimer.Interval := 10000; // Czas odúwieøania
+        HTTPTimer.Interval := 10000; // Czas od≈õwie≈ºania
 //        MakeHTTPQuery(Self);
         HTTPTimer.OnTimer := MakeHTTPQuery;
         HTTPTimer.Enabled := True;
@@ -1825,7 +1825,7 @@ end;
 
 constructor TServerPrefs.create(AOwner: TComponent);
 begin
- Self.FCategories := '/ /Regionalne/ /Regionalne/Polska/ /Regionalne/åwiat/ /Towarzyskie/ /Towarzyskie/RÛwieúnicy/ /Hobby/ /Internet/ /Komputer/ /Komputer/Gry/ /Motoryzacja/ /Muzyka/ /Polityka/ /Praca/ /Radio/ /Rozrywka/ /Religia/ /RÛøne/ /Sport/ /Szko≥a/ /Telewizja/ /Zdrowie/';
+ Self.FCategories := '/ /Regionalne/ /Regionalne/Polska/ /Regionalne/≈öwiat/ /Towarzyskie/ /Towarzyskie/R√≥wie≈õnicy/ /Hobby/ /Internet/ /Komputer/ /Komputer/Gry/ /Motoryzacja/ /Muzyka/ /Polityka/ /Praca/ /Radio/ /Rozrywka/ /Religia/ /R√≥≈ºne/ /Sport/ /Szko≈Ça/ /Telewizja/ /Zdrowie/';
 // Self.FColGuest := ($00DF0000, $00BFBF00, '#df00df', '#dfdf00', '#000000');
  Self.FColOp := clRed;
  Self.FColUs := clBlack;
@@ -2290,8 +2290,8 @@ begin
 
     PutStringPair('Czas zapisu', DateTimeToStr(now));
     case FromWhere of
-      fromRoom: PutStringPair('PokÛj', FromName);
-      fromPriv: PutStringPair('RozmÛwca', FromName);
+      fromRoom: PutStringPair('Pok√≥j', FromName);
+      fromPriv: PutStringPair('Rozm√≥wca', FromName);
     end;
     PutStringUnicode('<hr>');
   except
